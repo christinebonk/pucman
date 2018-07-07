@@ -126,7 +126,7 @@ window.onkeydown = function (eventObject) {
 
 drawMap();
 
-setInterval(ghostMovement,200);
+setInterval(ghostMovement,20);
 
 var ghost = {
 	direction: "right",
@@ -155,6 +155,28 @@ function ghostMovement() {
 
 var directions = ["left", "right", "up", "down"]
 
+
+function collisionDetect(direction){
+
+    if(direction == "up" && map[(player.ydir/32)][(player.xdir/32)] == 0){
+        player.y = player.ydir; //up    
+
+    } else if(direction == "down" && map[(player.ydir/32)][(player.xdir/32)] == 0){
+        player.y = player.ydir; //down
+
+    } else if(direction == "left" && map[player.ydir/32][(player.xdir/32)] == 0){
+        player.x = player.xdir; //left
+
+    } else if(direction == "right" && map[player.ydir/32][(player.xdir/32)] == 0){
+        player.x = player.xdir; //right
+    } 
+
+    player.xdir = player.x;
+    player.ydir = player.y;
+    movePlayer(player.xdir,player.ydir);
+    checkDead();
+}
+
 function collisionDetectGhost(direction){
 
     if(direction == "up" && map[(ghost.ydir/32)][(ghost.xdir/32)] == 0){
@@ -178,6 +200,13 @@ function collisionDetectGhost(direction){
     ghost.xdir = ghost.x;
     ghost.ydir = ghost.y;
     moveGhost(ghost.xdir,ghost.ydir);
+    checkDead();
+}
+
+function checkDead() {
+	if (map[ghost.ydir/32] === map[player.ydir/32] && map[ghost.xdir/32] === map[(player.xdir/32)]) {
+		console.log ("Over");
+	}
 }
 
 //pacman cannot move if heading toward a wall
