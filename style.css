@@ -1,0 +1,41 @@
+.tile {
+	height: 25px;
+	width: 25px;
+}
+
+.wall {
+	background: blue;
+}
+
+.space {
+	background: black;
+}
+
+.row {
+	display: flex;
+	z-index: 1;
+
+}
+
+.pacman {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	background: yellow;
+	position: absolute;
+	z-index: 2;
+}
+
+#map {
+	position: relative;
+	z-index: 1;
+}
+
+.ghost {
+	height: 20px;
+	width: 20px;
+	border-radius: 40%;
+	background: red;
+	position: absolute;
+	z-index: 2;
+}
